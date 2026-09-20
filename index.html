@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSE L10a — Lifts & Escalators · 升降機與自動梯系統</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🛗 BSE L10a — Lifts & Escalators: Transportation, Traffic Analysis & Safety</h1>
+    <p>垂直運輸系統、曳引與液壓電梯、自動扶梯工程、CIBSE Guide D 交通流量分析 · Lecture 10a · BSE</p>
+    <p>25 條選擇題 + 5 條計算簡答題 · 12 幅 SCADA 工業級動態向量原理圖 · Bilingual 中英對照</p>
+  </header>
+
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value" id="timer">90:00</div>
+      <div class="stat-label">Time Left / 剩餘時間</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value" id="answeredCount">0/25</div>
+      <div class="stat-label">Answered / 已答題數</div>
+    </div>
+    <div style="width:100%;">
+      <div class="progress-container"><div class="progress-fill" id="progressBar"></div></div>
+    </div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="score-circle" id="scoreCircle"><div class="score-text" id="finalScore">0%</div></div>
+    <div class="result-msg" id="resultMsg">Done!</div>
+    <div class="review-section" id="reviewSection"></div>
+    <div style="margin-top:20px;">
+      <button class="btn btn-secondary" onclick="location.reload()">Restart / 重新開始</button>
+    </div>
+  </div>
+
+  <nav class="tab-nav" id="tabNav">
+    <button class="tab-btn active" onclick="showSection('notes')">📚 Notes 筆記 (含 SCADA 原理圖)</button>
+    <button class="tab-btn" onclick="showSection('part1')">📋 MC (25)</button>
+    <button class="tab-btn" onclick="showSection('part2')">✏️ Short Q (5)</button>
+  </nav>
+
+  <!-- NOTES TAB -->
+  <section id="notesSection" class="section active">
+    <div class="intro-card">
+      <h3>👋 歡迎來到第十講(a)！ / Welcome to Lecture 10a!</h3>
+      <p>本講主題為 <strong>升降機與自動梯工程 (Lifts & Escalators)</strong>，是現代高層建築與大型交通樞紐不可或缺的垂直及傾斜客流動脈[cite: 11]。內容全面涵蓋<strong>電動曳引式客梯（曳引輪、對重、限速器、安全鉗）</strong>[cite: 11]、<strong>液壓電梯與電梯功率傳遞流動</strong>[cite: 11]、<strong>自動扶梯構造（梯級鏈、內軌、扶手帶驅動）與 30°/35° 傾角限制</strong>[cite: 11]、<strong>扶梯輸送能力公式（$N$ 與 $C_e$）</strong>[cite: 11]、<strong>自動人行道（Travelator）與無障礙通道</strong>[cite: 11]、<strong>人體人體工學（$600 \times 450\text{ mm}$ 佔位橢圓、空間緩衝區與擁擠密度）</strong>[cite: 11]、<strong>消防電梯專用防煙前廳規範</strong>[cite: 11]、<strong>寫字樓四大客流時段特徵</strong>[cite: 11]、<strong>建築人口估算（CIBSE Guide D 與香港 $+10\text{–}20\%$ 密度修正）</strong>[cite: 11]、<strong>上行高峰往返時間（$RTT$）數學模型與特快區跳層</strong>[cite: 11]、<strong>統計預期停站數（$S$）與最高反向樓層（$H$）概率計算</strong>[cite: 11]、<strong>單層循環時間（$T$）與服務質量評估指標（AWT $\approx 85\%$ 等候間隔）</strong>[cite: 11]。每節均配備高精度動態圖解！</p>
+    </div>
+
+    <div class="toc">
+      <h3>📑 Table of Contents / 課題目錄</h3>
+      <ol>
+        <li><a href="#t1">Electric Traction Passenger Lift Anatomy / 電動曳引式客梯構造、井道部件與安全機構</a></li>
+        <li><a href="#t2">Hydraulic Lift Mechanics & Elevator Power Flow / 液壓升降機原理與電梯功率傳遞平衡方程</a></li>
+        <li><a href="#t3">Escalator Anatomy & Drive Mechanism / 自動扶梯內部構造：驅動機、梯級鏈與扶手帶</a></li>
+        <li><a href="#t4">Escalator Incline Angles & Handling Capacity / 扶梯傾角標準（30° vs 35°）與輸送能力計算公式</a></li>
+        <li><a href="#t5">Passenger Conveyors & Barrier-Free Facilities / 自動人行道（動態步道）與無障礙通道設計</a></li>
+        <li><a href="#t6">Human Factors: Occupancy Ellipse & Crowd Density / 人體人體工學：佔位橢圓、緩衝區與擁擠度分級</a></li>
+        <li><a href="#t7">Firefighting Lifts & Protected Smoke-Free Lobbies / 消防升降機、1 小時防火門與專用防煙前廳</a></li>
+        <li><a href="#t8">Commercial Office Traffic Patterns: 4 Daily Peaks / 商業寫字樓四大客流模式與交通特徵</a></li>
+        <li><a href="#t9">Building Population Estimation & Up-Peak Criteria / 建築人口密度估算（CIBSE Guide D）與高峰到達率</a></li>
+        <li><a href="#t10">Classical Up-Peak Round Trip Time (RTT) Model / 經典上行高峰往返時間（RTT）公式與特快跳層</a></li>
+        <li><a href="#t11">Statistical Probability of Stops (S) & Reversal (H) / 預期停站數（S）與最高反向樓層（H）概率方程</a></li>
+        <li><a href="#t12">Floor Cycle Time, Service Quality & Simulation Tools / 樓層循環時間（T）、等候間隔評級與電腦模擬</a></li>
+      </ol>
+    </div>
+
+    <div id="notesContainer"></div>
+  </section>
+
+  <!-- MC TAB -->
+  <section id="part1Section" class="section">
+    <div class="intro-card">
+      <h3>📋 Multiple Choice Questions (25 題選擇題)</h3>
+      <p>題目嚴格覆蓋 Lecture 10a 所有升降機與扶梯機械構件、法規數值、人體工學參數、RTT 交通分析公式及 CIBSE Guide D 規範指標[cite: 11]。點選答案後點擊 <strong>Submit MC</strong> 查看成績及詳細中英題解。</p>
+    </div>
+    <div id="mcContainer"></div>
+    <div class="action-btns">
+      <button class="btn btn-success" onclick="submitMC()">Submit MC / 提交並查看成績與解釋</button>
+    </div>
+  </section>
+
+  <!-- SHORT Q TAB -->
+  <section id="part2Section" class="section">
+    <div class="intro-card">
+      <h3>✏️ Short Answer Questions (5 題結構化工程分析簡答題)</h3>
+      <p>包含完整經典 RTT 上行高峰交通分析計算題、曳引式 vs 液壓式 vs 扶梯多維比選、扶梯輸送能力公式推導、消防電梯防煙安全規範，以及人體空間緩衝區與客流分佈解析[cite: 11]。建議先在草稿紙上作答，再點擊按鈕查看 Model Answer 與評分要點。</p>
+    </div>
+    <div id="shortContainer"></div>
+    <div class="action-btns">
+      <button class="btn btn-primary" onclick="showAnswers()">Show All Answers / 顯示所有參考答案</button>
+    </div>
+  </section>
+</div>
+
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0, behavior:'auto'})" title="Back to top">↑</button>
+
+<script src="app.js"></script>
+</body>
+</html>
